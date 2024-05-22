@@ -1,0 +1,689 @@
+openapi: 3.0.0
+info:
+  title: Zepz Cases API
+  description: This API is to bring together all of the respective data relating to a case that we would use during the operation of the Contact Centre and workflow. AWS provides a series of APIs to perform certain functions and returns certain data but this would involve calling numerous APIs to get an overview of the data. The Zepz Cases API performs this operation and provides everything potentially required.
+  version: 1.0.0
+servers:
+  - url: https://0pojfuwpo2.execute-api.us-west-2.amazonaws.com/dev
+    description: Dev Stage
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+paths:
+  /cases/{cases_domain_name}/{case_id}:
+    get:
+      summary: Get Case Details - v1
+      description: This is the primary endpoint on this API. Retrieves information about a specific Amazon Connect case by making use of the case_id.
+      parameters:
+        - name: cases_domain_name
+          in: path
+          required: true
+          description: The Amazon Connect cases domain name. This will be taken off in the later version of this API.
+          schema:
+            type: string
+            example: devzepz-cases
+        - name: case_id
+          in: path
+          required: true
+          description: The unique identifier of the case.
+          schema:
+            type: string
+            format: uuid
+            example: "your_case_id"
+        - name: x-api-key
+          in: header
+          required: true
+          description: API key for authorization.
+          schema:
+            type: string
+            example: YOUR_API_KEY
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                  case_info:
+                    type: object
+                    description: Object containing detailed information about the case. The data returned in this object contains custom fields information associated with this case.
+                    properties:
+                      template_id:
+                        type: string
+                        example: ""
+                        description: The template ID associated with the case.
+                      tags:
+                        type: object
+                        additionalProperties:
+                          type: string
+                        description: Any tags associated with the case.
+                      Date/Time Last Reopened:
+                        type: string
+                        format: date-time
+                        example: ""
+                        description: The last time the case was reopened.
+                      Contact ID:
+                        type: string
+                        example: ""
+                        description: The contact ID associated with the case.
+                      Conversation ID:
+                        type: string
+                        example: ""
+                        description: The conversation ID associated with the case.
+                      title:
+                        type: string
+                        example: ""
+                        description: The title of the case.
+                      Customer Back Office Link:
+                        type: string
+                        example: ""
+                        description: A link to the customer back office.
+                      Date/Time Updated:
+                        type: string
+                        format: date-time
+                        example: ""
+                        description: The last time the case was updated.
+                      Date/Time Last Closed:
+                        type: string
+                        format: date-time
+                        example: ""
+                        description: The last time the case was closed.
+                      Case Reason:
+                        type: string
+                        example: ""
+                        description: The reason for the case.
+                      Assigned Transaction:
+                        type: string
+                        example: ""
+                        description: The transaction ID associated with the case.
+                      Assigned User:
+                        type: string
+                        example: ""
+                        description: The ARN of the agent assigned to the case.
+                      Date/Time Opened:
+                        type: string
+                        format: date-time
+                        example: ""
+                        description: The time the case was opened.
+                      Customer Id:
+                        type: string
+                        example: ""
+                        description: The customer ID associated with the case.
+                      status:
+                        type: string
+                        example: ""
+                        description: The status of the case.
+                      Assigned Queue:
+                        type: string
+                        example: ""
+                        description: The ARN of the queue assigned to the case.
+                      Account Enabled?:
+                        type: string
+                        example: ""
+                      Agent Escalated From:
+                        type: string
+                        example: ""
+                      AML/Compliance Reason:
+                        type: string
+                        example: ""
+                      Attachment Bucket:
+                        type: string
+                        example: ""
+                      Attachment Filename:
+                        type: string
+                        example: ""
+                      Case Id:
+                        type: string
+                        example: ""
+                      Case Language:
+                        type: string
+                        example: ""
+                      Case Origin:
+                        type: string
+                        example: ""
+                      Cleared Investigation:
+                        type: string
+                        example: ""
+                      Contact Name:
+                        type: string
+                        example: ""
+                      Customer's Preferred Remedy:
+                        type: string
+                        example: ""
+                      Data Deletion Request:
+                        type: string
+                        example: ""
+                      Data Deletion Request By:
+                        type: string
+                        example: ""
+                      Date/Time of Escalation:
+                        type: string
+                        example: ""
+                      Dispute Reason:
+                        type: string
+                        example: ""
+                      Dispute Status:
+                        type: string
+                        example: ""
+                      EA Pending Reason:
+                        type: string
+                        example: ""
+                      EA Related Ticket IDs:
+                        type: string
+                        example: ""
+                      EA Worked Days:
+                        type: string
+                        example: ""
+                      Email Status:
+                        type: string
+                        example: ""
+                      Escalated:
+                        type: string
+                        example: ""
+                      Escalated Investigation:
+                        type: string
+                        example: ""
+                      Escalation Complaint Source:
+                        type: string
+                        example: ""
+                      Escalation Complaint Source & Type:
+                        type: string
+                        example: ""
+                      Escalation Duration:
+                        type: string
+                        example: ""
+                      Escalation Owner:
+                        type: string
+                        example: ""
+                      Escalation Resolution Notes:
+                        type: string
+                        example: ""
+                      Escalation/Complaint Driver:
+                        type: string
+                        example: ""
+                      Final Remedy Details EA:
+                        type: string
+                        example: ""
+                      Final Remedy Executed By SendWave:
+                        type: string
+                        example: ""
+                      Growth Reason:
+                        type: string
+                        example: ""
+                      Incident or Transaction Date:
+                        type: string
+                        example: ""
+                      Initial Data Deletion Request Date:
+                        type: string
+                        example: ""
+                      Internal Comments:
+                        type: string
+                        example: ""
+                      Investigation Complete Date:
+                        type: string
+                        example: ""
+                      Investigation Date:
+                        type: string
+                        example: ""
+                      Investigation Valid:
+                        type: string
+                        example: ""
+                      Is This an Error Assertion?:
+                        type: string
+                        example: ""
+                  contact_attributes:
+                    type: object
+                    description: Object containing all contact attributes information for the initial contact id related to this case.
+                    properties:
+                      SendCountry:
+                        type: string
+                        example: ""
+                      needsKYCSelfie:
+                        type: string
+                        example: ""
+                      native-summary:
+                        type: string
+                        example: ""
+                      phoneLanguage:
+                        type: string
+                        example: ""
+                      receiveCountry:
+                        type: string
+                        example: ""
+                      language:
+                        type: string
+                        example: ""
+                      FraudChecks:
+                        type: string
+                        example: ""
+                      ChatQueueLower:
+                        type: string
+                        example: ""
+                      ewtChatQueueARN:
+                        type: string
+                        example: ""
+                      isConfirmedFraudster:
+                        type: string
+                        example: ""
+                      frontViewState:
+                        type: string
+                        example: ""
+                      isUnderReview:
+                        type: string
+                        example: ""
+                      mobileCountry:
+                        type: string
+                        example: ""
+                      DOB:
+                        type: string
+                        example: ""
+                      case-reason:
+                        type: string
+                        example: ""
+                      caseId:
+                        type: string
+                        example: ""
+                      blockReason:
+                        type: string
+                        example: ""
+                      customerFound:
+                        type: string
+                        example: ""
+                      AdditionalInfo:
+                        type: string
+                        example: ""
+                      transactionCurrency:
+                        type: string
+                        example: ""
+                      CustomerFullName:
+                        type: string
+                        example: ""
+                      customer-remedy:
+                        type: string
+                        example: ""
+                      priority:
+                        type: string
+                        example: ""
+                      Brand:
+                        type: string
+                        example: ""
+                      custARN:
+                        type: string
+                        example: ""
+                      error-assertion:
+                        type: string
+                        example: ""
+                      contactCenterState:
+                        type: string
+                        example: ""
+                      whenLastPhotoSubmitted:
+                        type: string
+                        example: ""
+                      case-summary:
+                        type: string
+                        example: ""
+                      caseEditUrl:
+                        type: string
+                        example: ""
+                      ewtText:
+                        type: string
+                        example: ""
+                      setLanguage:
+                        type: string
+                        example: ""
+                      hasOpenRaiseLimitsRequest:
+                        type: string
+                        example: ""
+                      ewtVoiceQueueARN:
+                        type: string
+                        example: ""
+                      isBlocked:
+                        type: string
+                        example: ""
+                      hasOpenUpsApiTicket:
+                        type: string
+                        example: ""
+                      threshold1Played:
+                        type: string
+                        example: ""
+                      whenLastBlocked:
+                        type: string
+                        example: ""
+                      case-title:
+                        type: string
+                        example: ""
+                      ewtNumber:
+                        type: string
+                        example: 0
+                      transactionAmount:
+                        type: string
+                        example: ""
+                      isBlockedForChargeback:
+                        type: string
+                        example: ""
+                      QueueName:
+                        type: string
+                        example: ""
+                      assignedQueue:
+                        type: string
+                        example: ""
+                      WaitTimeIntro:
+                        type: string
+                        example: ""
+                      customerLink:
+                        type: string
+                        example: ""
+                      assignedTransaction:
+                        type: string
+                        example: ""
+                      selectLanguage:
+                        type: string
+                        example: ""
+                      hasOpenMandatoryIdRequest:
+                        type: string
+                        example: ""
+                      isConfirmedScamVictim:
+                        type: string
+                        example: ""
+                      transactionDate:
+                        type: string
+                        example: ""
+                      OpenStatus:
+                        type: string
+                        example: ""
+                      AccountNumber:
+                        type: string
+                        example: ""
+                      queue_name:
+                        type: string
+                        example: ""
+                      threshold5:
+                        type: string
+                        example: ""
+                      threshold3:
+                        type: string
+                        example: ""
+                      threshold4:
+                        type: string
+                        example: ""
+                      ewtError:
+                        type: string
+                        example: false
+                      transactionAmountFull:
+                        type: string
+                        example: ""
+                      lamDynamicContent:
+                        type: string
+                        example: ""
+                      VoiceQueueLower:
+                        type: string
+                        example: ""
+                      ewtQueueOtherARN:
+                        type: string
+                        example: ""
+                      recipientCountry:
+                        type: string
+                        example: ""
+                      threshold1:
+                        type: string
+                        example: ""
+                      threshold2:
+                        type: string
+                        example: ""
+                      ewtMinutes:
+                        type: string
+                        example: 0
+                      ewtQueueARN:
+                        type: string
+                        example: ""
+                  agent_info:
+                    type: object
+                    description: Object containing information about the agent assigned to the case.
+                    properties:
+                      Id:
+                        type: string
+                        example: ""
+                      Arn:
+                        type: string
+                        example: ""
+                      Username:
+                        type: string
+                        example: ""
+                      IdentityInfo:
+                        type: object
+                        properties:
+                          FirstName:
+                            type: string
+                            example: ""
+                          LastName:
+                            type: string
+                            example: ""
+                          Mobile:
+                            type: string
+                            example: ""
+                      PhoneConfig:
+                        type: object
+                        properties:
+                          PhoneType:
+                            type: string
+                            example: ""
+                          AutoAccept:
+                            type: boolean
+                            example: ""
+                          AfterContactWorkTimeLimit:
+                            type: integer
+                            example: 0
+                          DeskPhoneNumber:
+                            type: string
+                            example: ""
+                      DirectoryUserId:
+                        type: string
+                        example: ""
+                      SecurityProfileIds:
+                        type: array
+                        items:
+                          type: string
+                          example: ""
+                      RoutingProfileId:
+                        type: string
+                        example: ""
+                      Tags:
+                        type: object
+                        additionalProperties:
+                          type: string
+                      LastModifiedTime:
+                        type: string
+                        format: date-time
+                        example: ""
+                      LastModifiedRegion:
+                        type: string
+                        example: us-west-2
+                  contact_information:
+                    type: object
+                    description: Object containing contact information related to the case's initial contact id information.
+                    properties:
+                      Arn:
+                        type: string
+                        example: ""
+                      Id:
+                        type: string
+                        example: ""
+                      InitiationMethod:
+                        type: string
+                        example: ""
+                      Channel:
+                        type: string
+                        example: ""
+                      QueueInfo:
+                        type: object
+                        properties:
+                          Id:
+                            type: string
+                            example: ""
+                          EnqueueTimestamp:
+                            type: string
+                            format: date-time
+                            example: ""
+                      AgentInfo:
+                        type: object
+                        properties:
+                          Id:
+                            type: string
+                            example: ""
+                          ConnectedToAgentTimestamp:
+                            type: string
+                            format: date-time
+                            example: ""
+                      InitiationTimestamp:
+                        type: string
+                        format: date-time
+                        example: ""
+                      DisconnectTimestamp:
+                        type: string
+                        format: date-time
+                        example: ""
+                      LastUpdateTimestamp:
+                        type: string
+                        format: date-time
+                        example: ""
+                      TotalPauseCount:
+                        type: integer
+                        example: 0
+                      Tags:
+                        type: object
+                        additionalProperties:
+                          type: string
+                  customer_profile_info:
+                    type: object
+                    description: Object containing detailed information about the customer profile.
+                    properties:
+                      ProfileId:
+                        type: string
+                        example: ""
+                      PartyType:
+                        type: string
+                        example: ""
+                      FirstName:
+                        type: string
+                        example: ""
+                      LastName:
+                        type: string
+                        example: ""
+                      Gender:
+                        type: string
+                        example: ""
+                      PhoneNumber:
+                        type: string
+                        example: ""
+                      EmailAddress:
+                        type: string
+                        example: ""
+                      FoundByItems:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            KeyName:
+                              type: string
+                              example: _profileId
+                            Values:
+                              type: array
+                              items:
+                                type: string
+                                example: ""
+                      PartyTypeString:
+                        type: string
+                        example: ""
+                      GenderString:
+                        type: string
+                        example: ""
+                  agent_manger_name:
+                    type: string
+                    example: ""
+                  agent_hierarchy_group_info:
+                    type: object
+                    additionalProperties:
+                      type: string
+                  related_items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        associationTime:
+                          type: string
+                          format: date-time
+                          example: ""
+                        content:
+                          type: object
+                          properties:
+                            contact:
+                              type: object
+                              properties:
+                                channel:
+                                  type: string
+                                  example: ""
+                                connectedToSystemTime:
+                                  type: string
+                                  format: date-time
+                                  example: ""
+                                contactArn:
+                                  type: string
+                                  example: ""
+                        relatedItemId:
+                          type: string
+                          example: ""
+                        tags:
+                          type: object
+                          additionalProperties:
+                            type: string
+                  related_contact_arns:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  
+                  message:
+                    type: string
+                    example: "Forbidden"
+        '500':
+          description: API Related Errors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: "{\"error\": \"An error occurred (ResourceNotFoundException) when calling the GetCase operation: A case with id '2e1278b3-a1c7-3e8f-a77e-29e2565ff457d' could not be found.\"}"
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Missing Authentication Token"
+  /cases/{case_id}:
+    get:
+      summary: Get Case Details - v2
+      description: This next version of this API will only require case_id as a path parameter and will not make require the cases domain name. - Not yet live.
